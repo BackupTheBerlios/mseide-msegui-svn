@@ -1,0 +1,16 @@
+MSEide+MSEgui version history
+
+Version 0.9a
+2006-07-08 tcustomedit.onkeydown.
+2006-07-07 Field keyeventty.keynomod, holds unmodified key.
+2006-07-06 property tgriddatalink.datafield, sets tcustomgrid.rowcolorstate and 
+ rowfontstate according to tgriddadalink.field.asinteger.
+2006-07-05 tinplaceedit.lasttextclipped.
+2006-07-05 Default of tgroupbox.optionswidget + 
+ [ow_arrrowfocusin,ow_arrowfocusout,ow_parenttabfocus,ow_subfocus].
+2006-07-05 Flag twidget.optionswidget ow_parenttabfocus.
+2006-07-04 tdbcalendardatetimeedit.
+2006-07-04 tcalendardatetimeedit.
+
+Version 0.9
+2006-07-01 First Sourceforge SVN release
