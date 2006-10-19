@@ -1,0 +1,53 @@
+MSEide+MSEgui version history
+
+Version 1.0rc1
+2006-10-19 oldb_invalidateonupdatedata -> olbdb_invalidateonupdatedata.
+2006-10-18 Blob suport for tmibconnection and tmpqconnection.
+2006-10-17 Calculated fields for tmbufdataset. 
+2006-10-16 tdbimage.
+2006-10-15 tfieldfieldlink.
+2006-09-27 tmsecomponent.linkedobjects, tobjeclinker.linkedobjects.
+2006-09-25 tstatfile moved to msestatfile.pas.
+ tmsedatamodule moved to msedatamodules.pas.
+ Properties tstatfile.activator, tactivator.onactvateerror,
+ tdbcontroller.onbeforeconnect, onconnecterror.
+ tpostprintprinter clipping.
+2006-09-23 tpostscriptprinter pattern support.
+
+Version 0.9b
+2006-08-27 tsplitter.options spo_dockleft,spo_docktop,spo_dockright,
+ spo_dockbottom, default on.
+2006-08-25 Property tscalingwidget.optionsscale, osc_expandx,osc_expandy,
+ osc_shrinkx,osc_shrinky, used in tgroupbox and tscrollbox.
+ tspacer.
+2006-08-24 tintegerbutton renamed to tdatabutton, tdbdatabutton,
+ tdialogstringedit, tdbdialogstringedit.
+2006-08-20 tprogressbar.
+2006-08-18 tsequencelink.
+2006-08-10 tpostscriptprinter imageprinting.
+2006-07-29 foregroundcolor renamed to colorforeground.
+2006-07-29 backgroundcolor renamed to colorbackground.
+2006-07-22 Property tfilenamedit.dialogkind removed,
+ use controller.options fdo_save.
+2006-07-19 tmsecomponent.helpcontext.
+2006-07-19 tapplication.helpcontext.
+2006-07-18 tcanvas.drawvect.
+2006-07-13 msedrawtext.breaklines.
+2006-07-12 tdbstringdisplb, tdbintegerdisplb, tdbrealdisplb, tdbdatetimedisplb.
+2006-07-11 tcustomlookupbuffer.lookupinteger, lookuptext and lookupfloat.
+2006-07-10 Switch to FPC 2.0.4, support for 2.0.2 and 2.0.3 removed.
+
+Version 0.9a
+2006-07-08 tcustomedit.onkeydown.
+2006-07-07 Field keyeventty.keynomod, holds unmodified key.
+2006-07-06 property tgriddatalink.datafield, sets tcustomgrid.rowcolorstate and 
+ rowfontstate according to tgriddadalink.field.asinteger.
+2006-07-05 tinplaceedit.lasttextclipped.
+2006-07-05 Default of tgroupbox.optionswidget + 
+ [ow_arrrowfocusin,ow_arrowfocusout,ow_parenttabfocus,ow_subfocus].
+2006-07-05 Flag twidget.optionswidget ow_parenttabfocus.
+2006-07-04 tdbcalendardatetimeedit.
+2006-07-04 tcalendardatetimeedit.
+
+Version 0.9
+2006-07-01 First Sourceforge SVN release
