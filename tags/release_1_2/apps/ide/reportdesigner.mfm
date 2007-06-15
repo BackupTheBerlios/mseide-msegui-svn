@@ -1,0 +1,258 @@
+inherited reportdesignerfo: treportdesignerfo
+  bounds_x = 425
+  bounds_y = 100
+  bounds_cx = 205
+  bounds_cy = 459
+  color = -2147483647
+  container.bounds_cx = 205
+  container.bounds_cy = 459
+  container.color = -1879048185
+  container.frame.dummy = 0
+  container.onchildscaled = repchildscaled
+  container.oncalcminscrollsize = nil
+  container.onchildmouseevent = reportchildmouseevent
+  icon.transparentcolor = -2147483648
+  icon.transparency = -2147483648
+  icon.image = {
+    0000000002000000180000001800000078010000000000000000000000000000
+    0000000000000000000000000000000000000000804CF019F8FCF816804CF002
+    F8FCF801F8000010F8FCF801C0C0C00380808001804CF002F8FCF801F8000010
+    F8FCF801C0C0C00100000001C0C0C00180808001804CF002F8FCF801F8000010
+    F8FCF801C0C0C00380808001804CF002F8FCF80180808010F8FCF80180808004
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF002F8FCF801C0C0C01480808001804CF002F8FCF801C0C0C01480808001
+    804CF00280808016804CF01900000009FEFF7F08FEFF7FBFFEFF7F08FEFF7FBF
+    FEFF7F00FEFF7FBFFEFF7FB7FEFF7F00FEFF7FBFFEFF7F00FEFF7F03FEFF7F00
+    FEFF7F00FEFF7FBFFEFF7F08FEFF7F00FEFF7F03FEFF7F40FEFF7F00FEFF7F00
+    FEFF7FB7FEFF7FBF00000008
+  }
+  onclose = nil
+  onresize = formresized
+  onchildscaled = repchildscaled
+  moduleclassname = 'Tformdesignerfo'
+  object dialh: tdial[0]
+    bounds_x = 7
+    bounds_y = 18
+    bounds_cx = 194
+    bounds_cy = 7
+    color = -1879048185
+    frame.localprops = [frl_fileft]
+    frame.dummy = 0
+    anchors = [an_left, an_top, an_right]
+    taborder = 4
+    dial.range = 100
+    dial.markers.count = 1
+    dial.markers.items = <    
+      item
+        color = -1610612729
+        val = (
+          0
+          True
+        )
+      end>
+    dial.ticks.count = 3
+    dial.ticks.items = <    
+      item
+        intervalcount = 10
+      end    
+      item
+        intervalcount = 20
+        color = -1610612733
+        length = 6
+      end    
+      item
+        intervalcount = 100
+        color = -1610612733
+        length = 3
+      end>
+  end
+  object tabbar: ttabbar[1]
+    optionswidget = [ow_mousewheel, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 120
+    bounds_y = 0
+    bounds_cx = 83
+    bounds_cy = 18
+    color = -1879048187
+    frame.dummy = 0
+    anchors = [an_left, an_top, an_right]
+    onactivetabchange = tabcha
+    ontabmoving = tabmo
+    onclientmouseevent = tabmouse
+    options = [tabo_dragsource, tabo_dragdest]
+    reffontheight = 14
+  end
+  object reportcontainer: tscrollbox[2]
+    bounds_x = 7
+    bounds_y = 25
+    bounds_cx = 198
+    bounds_cy = 434
+    frame.colorclient = -1610612730
+    frame.localprops = [frl_colorclient]
+    frame.dummy = 0
+    anchors = [an_left, an_top, an_right, an_bottom]
+    taborder = 1
+    onchildscaled = repcomtainerchildscaled
+    onscroll = reportcontainerscroll
+  end
+  object tspacer1: tspacer[3]
+    bounds_x = 144
+    bounds_y = 18
+    bounds_cx = 50
+    bounds_cy = 5
+    taborder = 2
+    linktop = tabbar
+    linkbottom = dialh
+    offset_bottom = -5
+  end
+  object dialv: tdial[4]
+    bounds_x = 0
+    bounds_y = 25
+    bounds_cx = 7
+    bounds_cy = 431
+    color = -1879048185
+    anchors = [an_left, an_top, an_bottom]
+    taborder = 3
+    dial.direction = gd_down
+    dial.range = 100
+    dial.markers.count = 1
+    dial.markers.items = <    
+      item
+        color = -1610612729
+        val = (
+          0
+          True
+        )
+      end>
+    dial.ticks.count = 3
+    dial.ticks.items = <    
+      item
+        intervalcount = 10
+      end    
+      item
+        intervalcount = 20
+        color = -1610612733
+        length = 6
+      end    
+      item
+        intervalcount = 100
+        color = -1610612733
+        length = 4
+      end>
+  end
+  object tspacer2: tspacer[5]
+    bounds_x = 144
+    bounds_y = 25
+    bounds_cx = 50
+    bounds_cy = 5
+    taborder = 5
+    linktop = dialh
+    linkbottom = reportcontainer
+    offset_bottom = -5
+  end
+  object tspacer3: tspacer[6]
+    bounds_x = 7
+    bounds_y = 173
+    bounds_cx = 5
+    bounds_cy = 50
+    taborder = 6
+    linkleft = dialv
+    linkright = reportcontainer
+    offset_right = -5
+  end
+  object xdisp: trealdisp[7]
+    bounds_x = 52
+    bounds_y = 0
+    bounds_cx = 68
+    bounds_cy = 18
+    color = -1879048187
+    frame.dummy = 0
+    taborder = 7
+    textflags = [tf_ycentered]
+    format = '0.0mm'
+    reffontheight = 14
+  end
+  object ydisp: trealdisp[8]
+    bounds_x = 0
+    bounds_y = 0
+    bounds_cx = 52
+    bounds_cy = 18
+    color = -1879048187
+    frame.dummy = 0
+    taborder = 8
+    format = '0.0'
+    reffontheight = 14
+  end
+  object tspacer4: tspacer[9]
+    bounds_x = 16
+    bounds_y = 25
+    bounds_cx = 50
+    bounds_cy = 5
+    taborder = 9
+    linktop = dialh
+    linkbottom = dialv
+    offset_bottom = -5
+  end
+  inherited popupme: tpopupmenu
+    menu.submenu.count = 22
+    menu.submenu.items = <    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+      end    
+      item
+        options = [mao_separator, mao_shortcutcaption]
+      end    
+      item
+        caption = 'Add report page'
+        onexecute = addpage
+      end    
+      item
+        caption = 'Delete report page'
+        name = 'delpage'
+        state = [as_localcaption, as_localonexecute]
+        options = [mao_shortcutcaption, mao_asyncexecute]
+        onexecute = deletepage
+      end>
+    onupdate = popupupda
+  end
+end
