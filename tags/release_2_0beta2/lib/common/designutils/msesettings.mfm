@@ -1,0 +1,353 @@
+object settingsfo: tsettingsfo
+  optionswidget = [ow_arrowfocus, ow_subfocus, ow_destroywidgets, ow_hinton, ow_autoscale]
+  bounds_x = 100
+  bounds_y = 106
+  bounds_cx = 358
+  bounds_cy = 574
+  taborder = 1
+  visible = False
+  container.optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_subfocus, ow_mousetransparent, ow_destroywidgets, ow_autoscale]
+  container.bounds_x = 0
+  container.bounds_y = 0
+  container.bounds_cx = 358
+  container.bounds_cy = 574
+  container.frame.dummy = 0
+  options = [fo_closeonesc, fo_autoreadstat, fo_autowritestat, fo_savepos, fo_savestate]
+  statfile = tstatfile1
+  caption = 'Configure MSE environment'
+  oncreate = formoncreate
+  moduleclassname = 'tmseform'
+  object templatedir: tfilenameedit
+    Tag = 5
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 247
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${TEMPLATEDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 6
+    hint = 'Where project templates reside.'
+    onsetvalue = setvalue
+    controller.filterlist.data = (
+      (
+        'Project files'
+        '*.prj'
+      )
+    )
+    controller.options = [fdo_directory]
+    controller.captionopen = 'Project template directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object tbutton1: tbutton
+    bounds_x = 240
+    bounds_y = 541
+    bounds_cx = 50
+    bounds_cy = 22
+    anchors = [an_top, an_right]
+    taborder = 13
+    state = [as_default, as_localdefault, as_localcaption]
+    caption = 'OK'
+    modalresult = mr_ok
+  end
+  object tbutton2: tbutton
+    bounds_x = 296
+    bounds_y = 541
+    bounds_cx = 50
+    bounds_cy = 22
+    anchors = [an_top, an_right]
+    state = [as_localcaption]
+    caption = 'Cancel'
+    modalresult = mr_cancel
+  end
+  object fpcdir: tfilenameedit
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 7
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${FPCDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 1
+    hint = 'Root directory of Free Pascal system.'
+    onsetvalue = setvalue
+    controller.options = [fdo_directory]
+    controller.captionopen = 'FPC root directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object msedir: tfilenameedit
+    Tag = 2
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 103
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${MSEDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 3
+    hint = 'Root directory of msegui.'
+    onsetvalue = setvalue
+    controller.options = [fdo_directory]
+    controller.captionopen = 'msegui root directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object compiler: tfilenameedit
+    Tag = 7
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 343
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${COMPILER}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 8
+    hint = 'Path to compiler (ppc386).'
+    onsetvalue = setvalue
+    controller.captionopen = 'Compiler path'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object debugger: tfilenameedit
+    Tag = 8
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 391
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${DEBUGGER}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 9
+    hint = 'Path to debugger (GDB)'
+    onsetvalue = setvalue
+    controller.captionopen = 'Debugger path'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object syntaxdefdir: tfilenameedit
+    Tag = 4
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 199
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${SYNTAXDEFDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 5
+    hint = 'Where syntax definition files reside.'
+    onsetvalue = setvalue
+    controller.filterlist.data = (
+      (
+        'Syntax definitions'
+        '*.sdef'
+      )
+    )
+    controller.options = [fdo_directory]
+    controller.captionopen = 'Project template directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object exeext: tstringedit
+    Tag = 9
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 439
+    bounds_cx = 78
+    bounds_cy = 37
+    frame.caption = '${EXEEXT}'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    taborder = 10
+    onsetvalue = setvalue
+    reffontheight = 14
+  end
+  object target: tstringedit
+    Tag = 10
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 96
+    bounds_y = 439
+    bounds_cx = 252
+    bounds_cy = 37
+    frame.caption = '${TARGET}'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 11
+    onsetvalue = setvalue
+    reffontheight = 14
+  end
+  object mselibdir: tfilenameedit
+    Tag = 3
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 151
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${MSELIBDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 4
+    hint = 'Root directory of msegui library.'
+    onsetvalue = setvalue
+    controller.options = [fdo_directory]
+    controller.captionopen = 'msegui root directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object fpclibdir: tfilenameedit
+    Tag = 1
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 55
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${FPCLIBDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 2
+    hint = 'Root directory of FPC library.'
+    controller.options = [fdo_directory]
+    controller.captionopen = 'FPC root directory'
+    reffontheight = 14
+  end
+  object printcomm: tstringedit
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 487
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = 'Print command'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 12
+    onsetvalue = setprintcomm
+    reffontheight = 14
+  end
+  object compstoredir: tfilenameedit
+    Tag = 6
+    optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight, ow_autoscale]
+    bounds_x = 8
+    bounds_y = 295
+    bounds_cx = 340
+    bounds_cy = 37
+    frame.caption = '${COMPSTOREDIR}'
+    frame.button.imagenr = 17
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      17
+      0
+      0
+    )
+    anchors = [an_left, an_top, an_right]
+    taborder = 7
+    hint = 'Where project templates reside.'
+    onsetvalue = setvalue
+    controller.filterlist.data = (
+      (
+        'Project files'
+        '*.prj'
+      )
+    )
+    controller.options = [fdo_directory]
+    controller.captionopen = 'Project template directory'
+    controller.ongetfilename = epandfilenamemacro
+    reffontheight = 14
+  end
+  object shortcutbu: tbutton
+    bounds_x = 10
+    bounds_y = 541
+    bounds_cx = 78
+    bounds_cy = 22
+    taborder = 14
+    state = [as_localcaption, as_localonexecute]
+    caption = 'Shortcuts'
+    onexecute = editshortcuts
+  end
+  object tstatfile1: tstatfile
+    filename = 'settingsfo.sta'
+    options = [sfo_memory]
+    left = 16
+    top = 32
+  end
+end
