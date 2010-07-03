@@ -1,0 +1,340 @@
+{ MSEgui Copyright (c) 1999-2009 by Martin Schreiber
+
+    See the file COPYING.MSE, included in this distribution,
+    for details about the copyright.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+}
+unit mseguiglob;
+
+{$ifdef FPC}{$mode objfpc}{$h+}{$interfaces corba}{$endif}
+
+interface
+uses
+ Classes,msegraphutils,msetypes,msekeyboard,mseerr,mseevent,msestrings;
+{$ifdef FPC}
+ 
+{$endif}
+
+type
+ unicharty = longword;
+ 
+ originty = (org_screen,org_widget,org_client,org_inner);
+ captionposty = (cp_center,cp_rightbottom,cp_right,cp_rightcenter,cp_righttop,
+                 cp_topright,cp_top,cp_topcenter,cp_topleft,
+                 cp_lefttop,cp_left,cp_leftcenter,cp_leftbottom,
+                 cp_bottomleft,cp_bottom,cp_bottomcenter,cp_bottomright
+                 );
+ imageposty = (ip_center,ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+                 ip_topright,ip_top,ip_topcenter,ip_topleft,
+                 ip_lefttop,ip_left,ip_leftcenter,ip_leftbottom,
+                 ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright
+                 );
+const
+ horzimagepos = [ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+                 ip_lefttop,ip_left,ip_leftcenter,ip_leftbottom];
+ vertimagepos = [ip_topright,ip_top,ip_topcenter,ip_topleft,
+                 ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright];
+type                 
+ mousebuttonty = (mb_none,mb_left,mb_right,mb_middle);
+ mousewheelty = (mw_none,mw_up,mw_down);
+
+ shiftstatety = (ss_shift,ss_alt,ss_ctrl,ss_left,ss_right,ss_middle,ss_double,
+                 ss_repeat,    //repeat keydown
+                 ss_second);   //right modifier keys, numpad
+ shiftstatesty = set of shiftstatety;
+
+const
+ keyshiftstatesmask: shiftstatesty = [ss_shift,ss_alt,ss_ctrl];
+ buttonshiftstatesmask: shiftstatesty = [ss_left,ss_right,ss_middle,ss_double];
+ shiftstatesmask = [ss_shift,ss_alt,ss_ctrl,ss_left,ss_right,ss_middle];
+
+type
+ mouseeventinfoty = record //same layout as mousewheeleventinfoty!
+  eventkind: eventkindty;
+  shiftstate: shiftstatesty;
+  pos: pointty;
+  eventstate: eventstatesty;
+  timestamp: longword; //usec, 0 -> invalid
+  button: mousebuttonty;
+ end;
+ pmouseeventinfoty = ^mouseeventinfoty;
+ 
+ mousewheeleventinfoty = record //same layout as mouseeventinfoty!
+  eventkind: eventkindty;
+  shiftstate: shiftstatesty;
+  pos: pointty;
+  eventstate: eventstatesty;
+  timestamp: longword; //usec, 0 -> invalid
+  wheel: mousewheelty;
+  delta: real;
+ end;
+ pmousewheeleventinfoty = ^mousewheeleventinfoty;
+ 
+ moeventinfoty = record
+  case integer of
+   0: (mouse: mouseeventinfoty);
+   1: (wheel: mousewheeleventinfoty);
+ end;
+
+ keyeventinfoty = record
+  eventkind: eventkindty;
+  key,keynomod: keyty;
+  chars: msestring;
+  shiftstate: shiftstatesty;
+  eventstate: eventstatesty;
+  timestamp: longword; //usec
+ end;
+ pkeyeventinfoty = ^keyeventinfoty;
+
+ stockfontty = (stf_default,stf_empty,stf_unicode,
+                stf_menu,stf_message,stf_report,
+                stf_proportional,stf_fixed,
+                stf_helvetica,stf_roman,stf_courier); //scaleable fonts
+ defaultfontnamesty = array[stockfontty] of string;
+ 
+type
+ windowoptionty = (wo_popup,wo_message,wo_embedded,
+                   wo_buttonendmodal,wo_groupleader,
+                   wo_taskbar,    //win32 only
+                   wo_notaskbar,  //linux only
+                   wo_windowcentermessage); //showmessage centered in window
+ windowoptionsty = set of windowoptionty;
+ windowposty = (wp_normal,wp_screencentered,wp_minimized,wp_maximized,wp_default,
+                wp_fullscreen);
+ windowsizety = (wsi_normal,wsi_minimized,wsi_maximized,wsi_fullscreen);
+
+ syswindowty = (sywi_none,sywi_tray);
+ 
+ paintdevicety = ptruint;
+ fontty = ptruint;
+ regionty = ptruint;
+ pixmapty = ptruint;
+ windowpty = array[0..7] of pointer;
+ windowty = record
+  id: winidty;
+  platformdata: windowpty;
+ end;
+ pwindowty = ^windowty;
+ 
+ internalwindowoptionsty = record
+  parent: winidty;
+  options: windowoptionsty;
+  pos: windowposty;
+  transientfor: winidty;
+  setgroup: boolean;
+  groupleader: winidty;
+  icon,iconmask: pixmapty;
+ end;
+ pinternalwindowoptionsty = ^internalwindowoptionsty;
+
+const
+ defaultppmm = 3;      //3 pixel per mm
+ sizingtol = 2; //+- pixel
+ sizingwidth = 2*sizingtol;                                        
+
+const
+ captiontoimagepos: array[captionposty] of imageposty = (
+               //cp_center,cp_rightbottom,cp_right,cp_rightcenter,cp_righttop,
+                 ip_center,ip_lefttop,    ip_left, ip_leftcenter, ip_leftbottom,
+               //cp_topright,  cp_top,   cp_topcenter,   cp_topleft,
+                 ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright,
+               //cp_lefttop,    cp_left, cp_leftcenter, cp_leftbottom,
+                 ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+               //cp_bottomleft,cp_bottom,cp_bottomcenter,cp_bottomright
+                 ip_topright,  ip_top,   ip_topcenter,   ip_topleft
+                 );
+ imagetocaptionpos: array[imageposty] of captionposty = (
+               //ip_center,ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+                 cp_center,cp_lefttop,    cp_left, cp_leftcenter, cp_leftbottom,
+               //ip_topright,  ip_top,   ip_topcenter,   ip_topleft,
+                 cp_bottomleft,cp_bottom,cp_bottomcenter,cp_bottomright,
+               //ip_lefttop,    ip_left, ip_leftcenter, ip_leftbottom,
+                 cp_rightbottom,cp_right,cp_rightcenter,cp_righttop,
+               //ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright
+                 cp_topright,  cp_top,   cp_topcenter,   cp_topleft
+                 );
+
+ swapcaptionpos: array[captionposty] of captionposty =
+ (//cp_center,cp_rightbottom,cp_right,cp_rightcenter,cp_righttop,
+    cp_center,cp_leftbottom,cp_left,cp_leftcenter,cp_lefttop,
+  //cp_topright,cp_top,cp_topcenter,cp_topleft,
+    cp_bottomright,cp_bottom,cp_bottomcenter,cp_bottomleft,
+  //cp_lefttop,cp_left,cp_leftcenter,cp_leftbottom,
+    cp_righttop,cp_right,cp_rightcenter,cp_rightbottom,
+  //cp_bottomleft,cp_bottom,cp_bottomcenter,cp_bottomright
+    cp_topleft,cp_top,cp_topcenter,cp_topright
+ );
+ simplecaptionpos: array[captionposty] of captionposty =
+ (//cp_center,cp_rightbottom,cp_right,cp_rightcenter,cp_righttop,
+    cp_center,cp_right,cp_right,cp_right,cp_right,
+  //cp_topright,cp_top,cp_topcenter,cp_topleft,
+    cp_top,cp_top,cp_top,cp_top,
+  //cp_lefttop,cp_left,cp_leftcenter,cp_leftbottom,
+    cp_left,cp_left,cp_left,cp_left,
+  //cp_bottomleft,cp_bottom,cp_bottomcenter,cp_bottomright
+    cp_bottom,cp_bottom,cp_bottom,cp_bottom
+ );
+
+ swapimagepos: array[imageposty] of imageposty =
+ (//ip_center,ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+    ip_center,ip_leftbottom,ip_left,ip_leftcenter,ip_lefttop,
+  //ip_topright,ip_top,ip_topcenter,ip_topleft,
+    ip_bottomright,ip_bottom,ip_bottomcenter,ip_bottomleft,
+  //ip_lefttop,ip_left,ip_leftcenter,ip_leftbottom,
+    ip_righttop,ip_right,ip_rightcenter,ip_rightbottom,
+  //ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright
+    ip_topleft,ip_top,ip_topcenter,ip_topright
+ );
+ simpleimagepos: array[imageposty] of imageposty =
+ (//ip_center,ip_rightbottom,ip_right,ip_rightcenter,ip_righttop,
+    ip_center,ip_right,ip_right,ip_right,ip_right,
+  //ip_topright,ip_top,ip_topcenter,ip_topleft,
+    ip_top,ip_top,ip_top,ip_top,
+  //ip_lefttop,ip_left,ip_leftcenter,ip_leftbottom,
+    ip_left,ip_left,ip_left,ip_left,
+  //ip_bottomleft,ip_bottom,ip_bottomcenter,ip_bottomright
+    ip_bottom,ip_bottom,ip_bottom,ip_bottom
+ );
+
+type
+ guierrorty = (gue_ok,gue_error,
+               gue_alreadyregistered,gue_notregistered,
+               gue_postevent,gue_timer,
+               gue_createwindow,gue_resizewindow,gue_destroywindow,
+               gue_windoworder,gue_windownotfound,
+               gue_windowfocus,gue_illegalstate,
+               gue_recursivemodal,gue_notmodaltop,
+               gue_creategc,gue_createprintergc,gue_createmetafilegc,
+               gue_destroygc,
+               gue_show,gue_hide,gue_modalwindow,
+               gue_init,gue_deinit,gue_thread,
+               gue_nodisplay,gue_nocolormap,gue_notruecolor,gue_flushgdi,
+               gue_cannotfocus,gue_invalidwidget,
+               gue_cursor,gue_rootwidget,
+               gue_inputmanager,gue_inputcontext,gue_timerlist,
+               {gue_resnotfound,}gue_capturemouse,gue_mousepos,
+               gue_registerclass,gue_scroll,gue_clipboard,gue_recursivetransientfor,
+               gue_notlocked,
+               gue_characterencoding,gue_invalidstream,gue_invalidcanvas,
+               gue_notimplemented,gue_getchildren,gue_reparent,gue_docktosyswindow,
+               gue_notraywindow,gue_sendevent,gue_noshelllib
+               );
+
+ egui = class(eerror)
+  private
+    function geterror: guierrorty;
+  public
+   constructor create(aerror: guierrorty; atext: string);
+   property error: guierrorty read geterror;
+ end;
+
+const
+ E_NOINTERFACE = longword($80004002);
+var
+ nozorderhandling: boolean;
+
+procedure guierror(error: guierrorty; text: string = ''); overload;
+procedure guierror(error: guierrorty; sender: tobject; text: string = ''); overload;
+
+implementation
+
+uses
+ mseglob,mseclasses,msestreaming;
+
+const
+ errortexts: array[guierrorty] of string =
+  ('','Error',
+   'Already registered',
+   'Not registered',
+   'Can not post event',
+   'Can not set timer',
+   'Can not create window',
+   'Can not resize window',
+   'Can not destroy window',
+   'Can not set window order',
+   'Window not found',
+   'Can not set window focus',
+   'Illegal state',
+   'Recursive modal',
+   'Not modal top',
+   'Can not create gc',
+   'Can not create printer gc',
+   'Can not create metafile gc',
+   'Can not destroy gc',
+   'Can not show window',
+   'Can not hide window',
+   'Can not show modal window',
+   'Init failed',
+   'Deinit failed',
+   'Can not create thread',
+   'Can not connect to display',
+   'Can not create colormap',
+   'Color mode must be "TrueColor", "DirectColor" or 8 bit "PseudoColor"',
+   'Can not flush gdi',
+   'Can not focus',
+   'Invalid widget',
+   'Can not create cursor',
+   'Invalid rootwidget',
+   'Invalid inputmanager',
+   'Invalid inputcontext',
+   'Corrupted timerlist',   
+{   'Resource not found',}
+   'Can not capture mouse',
+   'Can not set mouse pos',
+   'Can not register class',
+   'Can not scroll window',
+   'Clipboard error',
+   'Recursive transientfor window',
+   'Application not locked',
+   'Error in character encoding',
+   'Invalid stream',
+   'Invalid canvas',
+   'Not implemnted.',
+   'Can not get children.',
+   'Can not reparent window.',
+   'Can not dock to syswindow.',
+   'No tray window.',
+   'Can not send event.',
+   'Problem with shell library.'
+   );
+
+
+procedure guierror(error: guierrorty; text: string); overload;
+begin
+ if error = gue_ok then begin
+  exit;
+ end;
+ raise egui.create(error,text);
+end;
+
+procedure guierror(error: guierrorty; sender: tobject;
+                       text: string = ''); overload;
+begin
+ if error = gue_ok then begin
+  exit;
+ end;
+ if sender <> nil then begin
+  text:= sender.classname + ' ' + text;
+  if sender is tcomponent then begin
+   text:= text + fullcomponentname(tcomponent(sender));
+  end;
+ end;
+ guierror(error,text);
+end;
+
+{ egui }
+
+constructor egui.create(aerror: guierrorty;  atext: string);
+begin
+ inherited create(integer(aerror),atext,errortexts);
+end;
+
+function egui.geterror: guierrorty;
+begin
+ result:= guierrorty(ferror);
+end;
+
+end.
