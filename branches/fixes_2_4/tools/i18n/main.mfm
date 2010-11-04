@@ -1,0 +1,444 @@
+object mainfo: tmainfo
+  visible = False
+  bounds_x = 107
+  bounds_y = 283
+  bounds_cx = 624
+  bounds_cy = 390
+  container.frame.levelo = 1
+  container.frame.localprops = [frl_levelo]
+  container.frame.sbhorz.facebutton.template = concavex
+  container.frame.sbhorz.facebutton.dummy = 0
+  container.frame.sbhorz.faceendbutton.template = concavex
+  container.frame.sbhorz.faceendbutton.dummy = 0
+  container.frame.sbvert.facebutton.template = concavey
+  container.frame.sbvert.facebutton.dummy = 0
+  container.frame.sbvert.faceendbutton.template = concavey
+  container.frame.sbvert.faceendbutton.dummy = 0
+  container.bounds = (
+    0
+    19
+    624
+    371)
+  optionswindow = [wo_groupleader]
+  mainmenu = mainmenu1
+  options = [fo_main, fo_terminateonclose, fo_savepos, fo_savezorder, fo_savestate]
+  statfile = projectfo.projectstat
+  caption = 'MSEi18n'
+  oncreate = tmainfooncreate
+  oneventloopstart = tmainfoonloaded
+  ondestroy = tmainfoondestroy
+  onclosequery = mainclosequery
+  moduleclassname = 'tmseform'
+  object tgroupbox1: tgroupbox
+    frame.captiondist = -4
+    frame.localprops1 = [frl1_captiondist]
+    frame.dummy = 0
+    face.template = concavex
+    face.dummy = 0
+    bounds_x = 1
+    bounds_y = 1
+    bounds_cx = 622
+    bounds_cy = 24
+    anchors = [an_top]
+  end
+  object grid: twidgetgrid
+    frame.sbvert.facebutton.template = concavey
+    frame.sbvert.facebutton.dummy = 0
+    frame.sbvert.faceendbutton.template = concavey
+    frame.sbvert.faceendbutton.dummy = 0
+    frame.sbhorz.facebutton.template = concavex
+    frame.sbhorz.facebutton.dummy = 0
+    frame.sbhorz.faceendbutton.template = concavex
+    frame.sbhorz.faceendbutton.dummy = 0
+    taborder = 5
+    bounds_x = 1
+    bounds_y = 25
+    bounds_cx = 622
+    bounds_cy = 363
+    anchors = [an_left, an_top, an_right, an_bottom]
+    optionsgrid = [og_colsizing, og_focuscellonenter, og_colchangeontabkey, og_wrapcol, og_autopopup]
+    fixrows.count = 1
+    fixrows.items = <
+      item
+        face.template = convexx
+        face.dummy = 0
+        height = 15
+        captions.count = 5
+        captions.items = <
+          item
+            caption = 'Name'
+          end
+          item
+            caption = 'Type'
+          end
+          item
+            caption = 'NT'
+          end
+          item
+            caption = 'Comment'
+          end
+          item
+            caption = 'Value'
+          end>
+      end>
+    datacols.count = 5
+    datacols.options = [co_proportional, co_savestate]
+    datacols.items = <
+      item
+        width = 210
+        options = [co_readonly, co_proportional, co_savestate]
+        widgetname = 'tree'
+      end
+      item
+        options = [co_readonly, co_savestate]
+        widgetname = 'typedisp'
+        dataclass = tgridenumdatalist
+      end
+      item
+        width = 19
+        options = [co_drawfocus, co_savestate]
+        widgetname = 'donottranslate'
+        dataclass = tgridintegerdatalist
+      end
+      item
+        width = 133
+        options = [co_proportional, co_savestate]
+        widgetname = 'comment'
+        dataclass = tgridmsestringdatalist
+      end
+      item
+        width = 110
+        options = [co_readonly, co_proportional, co_savestate]
+        widgetname = 'value'
+        dataclass = tgridmsestringdatalist
+      end>
+    datarowheight = 16
+    statfile = projectfo.projectstat
+    reffontheight = 13
+    object tree: ttreeitemedit
+      optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight]
+      color = -1879048185
+      frame.levelo = 0
+      frame.colorclient = -2147483646
+      frame.localprops = [frl_levelo, frl_colorclient]
+      taborder = 1
+      visible = False
+      bounds_x = 0
+      bounds_y = 0
+      bounds_cx = 210
+      bounds_cy = 16
+      optionsedit = [oe_readonly, oe_undoonesc, oe_checkmrcancel, oe_exitoncursor, oe_savestate]
+      onupdaterowvalues = treeonupdaterowvalues
+      options = [teo_treecolnavig]
+      reffontheight = 13
+    end
+    object typedisp: tenumtypeedit
+      optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight]
+      color = -1879048185
+      frame.levelo = 0
+      frame.colorclient = -2147483646
+      frame.localprops = [frl_levelo, frl_colorclient]
+      frame.button.options = [fbo_invisible, fbo_disabled]
+      taborder = 2
+      visible = False
+      bounds_x = 211
+      bounds_y = 0
+      bounds_cx = 50
+      bounds_cy = 16
+      optionsedit = [oe_readonly, oe_undoonesc, oe_checkmrcancel, oe_exitoncursor, oe_savestate]
+      dropdown.options = [deo_selectonly, deo_autodropdown, deo_disabled]
+      dropdown.cols.count = 1
+      dropdown.cols.items = <
+        item
+        end>
+      oninit = typedisponinit
+      reffontheight = 13
+    end
+    object donottranslate: tbooleanedit
+      optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets]
+      color = -2147483646
+      frame.levelo = 0
+      frame.localprops = [frl_levelo]
+      frame.dummy = 0
+      taborder = 3
+      bounds_x = 262
+      bounds_y = 0
+      bounds_cx = 19
+      bounds_cy = 16
+      optionsedit = [oe_undoonesc, oe_closequery, oe_checkmrcancel, oe_eatreturn, oe_resetselectonexit, oe_exitoncursor, oe_endonenter, oe_autoselect, oe_autoselectonfirstclick, oe_autopopupmenu, oe_keyexecute, oe_savestate]
+      visible = False
+      onsetvalue = donottranslateonsetvalue
+    end
+    object comment: tmemodialogedit
+      frame.levelo = 0
+      frame.colorclient = -2147483646
+      frame.localprops = [frl_levelo, frl_colorclient]
+      frame.button.color = -2147483646
+      frame.button.imagenr = 17
+      taborder = 4
+      visible = False
+      bounds_x = 282
+      bounds_y = 0
+      bounds_cx = 133
+      bounds_cy = 16
+      optionsedit = [oe_undoonesc, oe_closequery, oe_checkmrcancel, oe_eatreturn, oe_resetselectonexit, oe_exitoncursor, oe_endonenter, oe_autoselect, oe_autoselectonfirstclick, oe_hintclippedtext, oe_autopopupmenu, oe_keyexecute, oe_savestate]
+      font.height = 12
+      font.name = 'stf_default'
+      font.xscale = 1.000000000000000000
+      font.dummy = 0
+      onsetvalue = commentonsetvalue
+      reffontheight = 14
+    end
+    object value: tmemodialogedit
+      optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_destroywidgets, ow_fontglyphheight]
+      color = -1879048185
+      frame.levelo = 0
+      frame.colorclient = -2147483646
+      frame.localprops = [frl_levelo, frl_colorclient]
+      frame.button.imagenr = 17
+      frame.button.options = [fbo_invisible, fbo_disabled]
+      taborder = 5
+      visible = False
+      bounds_x = 416
+      bounds_y = 0
+      bounds_cx = 110
+      bounds_cy = 16
+      optionsedit = [oe_readonly, oe_undoonesc, oe_checkmrcancel, oe_exitoncursor, oe_hintclippedtext, oe_savestate]
+      reffontheight = 13
+    end
+  end
+  object flat: tbooleanedit
+    color = -2147483645
+    frame.caption = 'flat'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      1
+      19
+      1)
+    taborder = 1
+    bounds_x = 9
+    bounds_y = 5
+    bounds_cx = 32
+    bounds_cy = 15
+    statfile = projectfo.projectstat
+    optionsedit = [oe_undoonesc, oe_closequery, oe_checkmrcancel, oe_eatreturn, oe_resetselectonexit, oe_exitoncursor, oe_endonenter, oe_autoselect, oe_autoselectonfirstclick, oe_autopopupmenu, oe_keyexecute, oe_checkvaluepaststatread, oe_savevalue, oe_savestate]
+    ondataentered = formatchanged
+  end
+  object stringonly: tbooleanedit
+    color = -2147483645
+    frame.caption = 'string only'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      1
+      53
+      1)
+    taborder = 2
+    bounds_x = 57
+    bounds_y = 5
+    bounds_cx = 66
+    bounds_cy = 15
+    statfile = projectfo.projectstat
+    ondataentered = formatchanged
+  end
+  object nont: tbooleanedit
+    color = -2147483645
+    frame.caption = 'no NT'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      1
+      31
+      1)
+    taborder = 3
+    bounds_x = 153
+    bounds_y = 5
+    bounds_cx = 44
+    bounds_cy = 15
+    statfile = projectfo.projectstat
+    ondataentered = formatchanged
+    onsetvalue = nontonsetvalue
+  end
+  object ntonly: tbooleanedit
+    color = -2147483645
+    frame.caption = 'NT only'
+    frame.dummy = 0
+    frame.outerframe = (
+      0
+      1
+      39
+      1)
+    taborder = 4
+    bounds_x = 233
+    bounds_y = 5
+    bounds_cx = 52
+    bounds_cy = 15
+    statfile = projectfo.projectstat
+    ondataentered = formatchanged
+    onsetvalue = ntonlyonsetvalue
+  end
+  object mainstatfile: tstatfile
+    filename = 'msei18n.sta'
+    filedir = '"^/.mseide"'
+    onstatupdate = mainupdatestat
+    Left = 16
+    Top = 96
+  end
+  object mainmenu1: tmainmenu
+    onupdate = mainmenuupdate
+    facetemplate = convexx
+    itemframetemplate = menuitemframe
+    itemframetemplateactive = menuitemframe
+    menu.submenu.count = 10
+    menu.submenu.items = <
+      item
+        caption = '&Open'
+        name = 'open'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = onprojectopen
+      end
+      item
+        caption = '&Save'
+        name = 'save'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = onprojectsave
+      end
+      item
+        caption = 'Save &as'
+        name = 'saveas'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = saveasexecute
+      end
+      item
+        caption = '&New'
+        name = 'new'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = newprojectexe
+      end
+      item
+        caption = '&Edit'
+        name = 'edit'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = onprojectedit
+      end
+      item
+        caption = '&Import'
+        name = 'import'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = importonexecute
+      end
+      item
+        caption = 'Ex&port'
+        name = 'export'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = exportonexecute
+      end
+      item
+        caption = '&Make'
+        name = 'make'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = makeonexecute
+      end
+      item
+        submenu.count = 2
+        submenu.items = <
+          item
+            caption = '&About'
+            state = [as_localcaption, as_localonexecute]
+            onexecute = aboutexe
+          end
+          item
+            caption = '&Configure MSEi18n'
+            state = [as_localcaption, as_localonexecute]
+            onexecute = configureonexecute
+          end>
+        caption = 'Se&ttings'
+        name = 'settings'
+        state = [as_localcaption]
+      end
+      item
+        caption = 'E&xit'
+        state = [as_localcaption, as_localonexecute]
+        onexecute = exitexe
+      end>
+    Left = 256
+    Top = 160
+  end
+  object projectfiledialog: tfiledialog
+    statfile = mainstatfile
+    controller.filterlist.data = (
+      (
+        'Translate project'
+        '*.trp'))
+    controller.defaultext = 'trp'
+    controller.options = [fdo_checkexist, fdo_chdir]
+    controller.captionopen = 'Open translate project'
+    controller.captionsave = 'Save translate project'
+    Left = 120
+    Top = 156
+  end
+  object threadcomp: tthreadcomp
+    onexecute = makeexecute
+    onterminate = maketerminate
+    Left = 209
+    Top = 115
+  end
+  object convexx: tfacecomp
+    template.fade_pos.count = 2
+    template.fade_pos.items = (
+      0.000000000000000000
+      1.000000000000000000)
+    template.fade_color.count = 2
+    template.fade_color.items = (
+      -1610612732
+      -1610612731)
+    template.fade_direction = gd_up
+    Left = 385
+    Top = 103
+  end
+  object menuitemframe: tframecomp
+    template.levelo = -1
+    template.leveli = 1
+    Left = 385
+    Top = 227
+  end
+  object convexy: tfacecomp
+    template.fade_pos.count = 2
+    template.fade_pos.items = (
+      0.000000000000000000
+      1.000000000000000000)
+    template.fade_color.count = 2
+    template.fade_color.items = (
+      -1610612732
+      -1610612731)
+    template.fade_direction = gd_left
+    Left = 481
+    Top = 103
+  end
+  object concavex: tfacecomp
+    template.fade_pos.count = 2
+    template.fade_pos.items = (
+      0.000000000000000000
+      1.000000000000000000)
+    template.fade_color.count = 2
+    template.fade_color.items = (
+      -1610612732
+      -1610612731)
+    template.fade_direction = gd_down
+    Left = 385
+    Top = 135
+  end
+  object concavey: tfacecomp
+    template.fade_pos.count = 2
+    template.fade_pos.items = (
+      0.000000000000000000
+      1.000000000000000000)
+    template.fade_color.count = 2
+    template.fade_color.items = (
+      -1610612732
+      -1610612731)
+    Left = 481
+    Top = 135
+  end
+end
