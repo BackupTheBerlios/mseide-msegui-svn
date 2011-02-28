@@ -1,0 +1,24 @@
+object sourcehintfo: tsourcehintfo
+  optionswidget = [ow_mousefocus, ow_tabfocus, ow_arrowfocus, ow_subfocus, ow_mousewheel, ow_destroywidgets, ow_hinton]
+  visible = False
+  bounds_x = 100
+  bounds_y = 291
+  bounds_cx = 314
+  bounds_cy = 214
+  container.frame.framei_left = 0
+  container.frame.framei_top = 0
+  container.frame.framei_right = 0
+  container.frame.framei_bottom = 0
+  container.frame.localprops = [frl_fileft, frl_fitop, frl_firight, frl_fibottom]
+  container.bounds = (
+    0
+    0
+    314
+    214
+  )
+  optionswindow = [wo_message]
+  options = [fo_freeonclose, fo_closeonesc, fo_autoreadstat, fo_autowritestat, fo_savepos, fo_savestate]
+  onclose = sourcehintfoonclose
+  onresize = formonresize
+  moduleclassname = 'tmseform'
+end
