@@ -1,3 +1,27 @@
+****************************************************************************
+****************************************************************************
+****************************************************************************
+***                                                                      ***
+***  The SVN repositories of MSEide+MSEgui will not be updated anymore.  ***
+***                                                                      ***
+****************************************************************************
+****************************************************************************
+****************************************************************************
+
+Hi,                 
+
+Because of the dead of BerliOS at end of the year and because there are no 
+viable non US alternatives for a free SVN hosting I switched MSEide+MSEgui to 
+git and opened a project on Gitorious:
+https://gitorious.org/mseide-msegui
+A mirror is here:
+http://sourceforge.net/scm/?type=git&group_id=165409
+
+
+2011-10-07 Martin Schreiber
+
+-----------------------------------------------------------------------------
+
 MSEide+MSEgui Pascal Cross Platform GUI Development System.
  
 2011-02-26 Version 2.6
