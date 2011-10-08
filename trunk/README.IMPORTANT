@@ -19,3 +19,26 @@ http://sourceforge.net/scm/?type=git&group_id=165409
 
 
 2011-10-07 Martin Schreiber
+
+HOWTO git from IvankoB:
+
+FOR LINUX:
+
+1. Initial  download of MSE* sources:
+
+In Linux DEBIAN:
+
+# apt-get install git git-core
+# [ -d /usr/src/GITROOT ] ||  mkdir /usr/src/GITROOT
+# cd /usr/src/GITROOT
+# git clone git://gitorious.org/mseide-msegui/mseide-msegui.git
+
+and wait until cloning finishes. Don't intterupt the download otherwise  
+all partial pieces will be erased !
+Upon completion, newly created /usr/src/GITROOT/mseide-msegui/* will  
+contain the downloaded sources.
+
+2. To get latest sources:
+
+# cd /usr/src/GITROOT/mseide-msegui/
+# git pull
