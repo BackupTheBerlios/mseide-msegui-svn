@@ -42,3 +42,7 @@ contain the downloaded sources.
 
 # cd /usr/src/GITROOT/mseide-msegui/
 # git pull
+HOWTO git from Graeme:
+
+http://opensoft.homeip.net:8080/wiki/wiki.cgi?p=git-howto
+http://opensoft.homeip.net:8080/wiki/wiki.cgi?p=git-tips
